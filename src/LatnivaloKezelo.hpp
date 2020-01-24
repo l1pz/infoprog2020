@@ -56,7 +56,7 @@ namespace LatnivaloKezelo {
 			}
 		}
 		else {
-			std::cout << "A latnivalok.csv hiányzik!";
+			std::cout << "A latnivalok.csv hiÃ¡nyzik!" << std::endl;
 			exit(-1);
 		}
 	}

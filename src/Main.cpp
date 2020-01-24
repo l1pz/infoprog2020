@@ -5,9 +5,6 @@ using namespace LatnivaloKezelo;
 
 int main()
 {
-	SetConsoleCP(1250);
-	SetConsoleOutputCP(1250);
-	std::setlocale(LC_ALL, "1250");
 	Beolvas("latnivalok.csv");
 	IO::Listaz(latnivalok);
 	auto a = KeresAzonosito(25);

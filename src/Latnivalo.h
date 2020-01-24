@@ -6,12 +6,12 @@ enum class Kategoria {
 
 struct Latnivalo
 {
-	// Függvények
+	// FÃ¼ggvÃ©nyek
 	Latnivalo(const unsigned azon, std::string_view nev, const float hossz, const float szel, std::string_view katSzoveg, const float atlIdo, const std::string_view leiras);
 	Latnivalo() = default;
 	inline bool operator< (const Latnivalo& masik) const{ return (this->azon < masik.azon); }
 
-	// Változók
+	// VÃ¡ltozÃ³k
 	unsigned azon;
 	std::string nev; 
 	float hossz; 

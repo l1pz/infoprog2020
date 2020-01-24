@@ -6,5 +6,4 @@ Latnivalo::Latnivalo(const unsigned azon_, std::string_view nev_, const float ho
 {
 	std::replace(nev.begin(), nev.end(), '_', ' ');
 	std::replace(leiras.begin(), leiras.end(), '_', ' ');
-	if(k)
 }
