@@ -7,8 +7,10 @@ int main()
 {
 	Beolvas("latnivalok.csv");
 	IO::Listaz(latnivalok);
-	auto a = KeresAzonosito(25);
+	auto a = KeresKategoria("természeti kincsek");
 	if (a.has_value())
-		std::cout << a.value()->nev;
-	else std::cout << "Nincs ilyen!\n";
+		for (auto latnivalo : a.value())
+			std::cout << latnivalo->nev << ", ";
+	else
+		std::cout << "Nincs ilyen!\n";
 }
