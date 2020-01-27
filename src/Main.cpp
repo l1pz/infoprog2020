@@ -10,7 +10,9 @@ int main()
 	auto a = KeresKategoria("természeti kincsek");
 	if (a.has_value())
 		for (auto latnivalo : a.value())
-			std::cout << latnivalo->nev << ", ";
+			Torol(latnivalo);
 	else
 		std::cout << "Nincs ilyen!\n";
+	std::cout << std::endl;
+	IO::Listaz(latnivalok);
 }

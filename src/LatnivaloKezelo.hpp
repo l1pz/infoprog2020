@@ -44,7 +44,14 @@ std::optional<std::vector<std::shared_ptr<Latnivalo>>> KeresSzoveg(std::string_v
 		return std::nullopt;
 	return talalatok;
 }
-void Hozzaad(const unsigned azon, const std::string_view nev, const float hossz, const float szel, std::string_view katSzoveg, const float atlIdo, std::string_view leiras)
+void Torol(const std::shared_ptr<Latnivalo> latnivalo)
+{
+	auto it = std::find(latnivalok.begin(), latnivalok.end(), latnivalo);
+	latnivalok.erase(it);
+	for (; it < latnivalok.end(); it++)
+		(*it)->azon--;
+}
+void Hozzaad(const unsigned azon, std::string_view nev, const float hossz, const float szel, std::string_view katSzoveg, const float atlIdo, std::string_view leiras)
 {
 	std::shared_ptr<Latnivalo> latnivalo{std::make_shared<Latnivalo>(azon, nev, hossz, szel, katSzoveg, atlIdo, leiras)};
 	latnivalok.emplace_back(latnivalo);
