@@ -56,7 +56,7 @@ void Hozzaad(const unsigned azon, std::string_view nev, const float hossz, const
 	std::shared_ptr<Latnivalo> latnivalo{std::make_shared<Latnivalo>(azon, nev, hossz, szel, katSzoveg, atlIdo, leiras)};
 	latnivalok.emplace_back(latnivalo);
 }
-void Beolvas(const std::string &fajlNev)
+void Betolt(const std::string &fajlNev)
 {
 	std::ifstream fajlBe(fajlNev);
 	if (fajlBe)
@@ -85,12 +85,28 @@ void Beolvas(const std::string &fajlNev)
 			sorStream >> azon >> nev >> hossz >> szel >> katSzoveg >> atlIdo >> leiras;
 			Hozzaad(azon, nev, hossz, szel, katSzoveg, atlIdo, leiras);
 		}
+		fajlBe.close();
 	}
 	else
 	{
 		std::cout << "A latnivalok.csv hiányzik!" << std::endl;
 		exit(-1);
 	}
+}
+void Mentes(const std::string &fajlNev)
+{
+	std::ofstream fajlKi(fajlNev);
+	fajlKi << "azonosito;nev;hosszusag;szelesseg;kategoria;atlagos_ido;leiras" << std::endl;
+	std::cout.precision(6);
+	for (auto latnivalo : latnivalok)
+	{
+		fajlKi << latnivalo->azon << ';' << latnivalo->nev << ';' << std::fixed << latnivalo->hossz << ';' << std::fixed << latnivalo->szel << ';' << latnivalo->kat << ';' << std::fixed << latnivalo->atlIdo << ';' << latnivalo->leiras << std::endl;
+	}
+	fajlKi.close();
+}
+void KepHozzaad(const std::shared_ptr<Latnivalo> latnivalo, const std::string_view fajlNev)
+{
+	latnivalo->kepek.emplace_back(fajlNev);
 }
 
 } // namespace LatnivaloKezelo

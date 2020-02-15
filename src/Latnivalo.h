@@ -15,4 +15,5 @@ struct Latnivalo
 	std::string kat;
 	float atlIdo;
 	std::string leiras;
+	std::vector<std::string> kepek;
 };

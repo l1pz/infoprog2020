@@ -5,7 +5,7 @@ using namespace LatnivaloKezelo;
 
 int main()
 {
-	Beolvas("latnivalok.csv");
+	Betolt("latnivalok.csv");
 	IO::Listaz(latnivalok);
 	auto a = KeresKategoria("természeti kincsek");
 	if (a.has_value())
