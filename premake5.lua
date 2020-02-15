@@ -1,16 +1,16 @@
-workspace "Infoprog2020"
+workspace "infoprog2020"
 	architecture "x86_64"
 	
 	configurations
 	{
-		"Debug",
-		"Release",
+		"debug",
+		"release",
 	}
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-project "Infoprog2020"
-	location "Infoprog2020"
+project "infoprog2020"
+	location "infoprog2020"
 	kind "ConsoleApp"
 	language "C++"
 	
@@ -37,3 +37,14 @@ project "Infoprog2020"
 	
 	filter "configurations:Release"
 		optimize "on"
+
+newaction {
+	trigger     = "clean",
+	description = "clean the software",
+	execute     = function ()
+			print("clean the build...")
+			os.rmdir("./bin-obj")
+			os.rmdir("./bin")
+			print("done.")
+	end
+}

@@ -38,17 +38,17 @@ define POSTBUILDCMDS
 endef
 
 ifeq ($(config),debug)
-TARGETDIR = ../bin/Debug-linux-x86_64
-TARGET = $(TARGETDIR)/Infoprog2020
-OBJDIR = ../bin-obj/Debug-linux-x86_64
+TARGETDIR = ../bin/debug-linux-x86_64
+TARGET = $(TARGETDIR)/infoprog2020
+OBJDIR = ../bin-obj/debug-linux-x86_64
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++17
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
 
 else ifeq ($(config),release)
-TARGETDIR = ../bin/Release-linux-x86_64
-TARGET = $(TARGETDIR)/Infoprog2020
-OBJDIR = ../bin-obj/Release-linux-x86_64
+TARGETDIR = ../bin/release-linux-x86_64
+TARGET = $(TARGETDIR)/infoprog2020
+OBJDIR = ../bin-obj/release-linux-x86_64
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++17
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s
@@ -77,7 +77,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
-	@echo Linking Infoprog2020
+	@echo Linking infoprog2020
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -98,7 +98,7 @@ else
 endif
 
 clean:
-	@echo Cleaning Infoprog2020
+	@echo Cleaning infoprog2020
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)

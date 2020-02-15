@@ -16,6 +16,7 @@ std::optional<std::shared_ptr<Latnivalo>> KeresAzonosito(const unsigned azon)
 		return std::nullopt;
 	return *talalat;
 }
+
 std::optional<std::vector<std::shared_ptr<Latnivalo>>> KeresKategoria(std::string_view kat)
 {
 	std::vector<std::shared_ptr<Latnivalo>> talalatok;
@@ -28,9 +29,11 @@ std::optional<std::vector<std::shared_ptr<Latnivalo>>> KeresKategoria(std::strin
 		return std::nullopt;
 	return talalatok;
 }
+
 std::optional<std::vector<std::shared_ptr<Latnivalo>>> KeresSzoveg(std::string_view szoveg)
 {
 	std::vector<std::shared_ptr<Latnivalo>> talalatok;
+
 	for (auto latnivalo : latnivalok)
 	{
 		auto talalat = std::search(
@@ -40,10 +43,13 @@ std::optional<std::vector<std::shared_ptr<Latnivalo>>> KeresSzoveg(std::string_v
 		if (talalat != latnivalo->nev.end())
 			talalatok.emplace_back(latnivalo);
 	}
+
 	if (talalatok.empty())
 		return std::nullopt;
+
 	return talalatok;
 }
+
 void Torol(const std::shared_ptr<Latnivalo> latnivalo)
 {
 	auto it = std::find(latnivalok.begin(), latnivalok.end(), latnivalo);
@@ -51,11 +57,13 @@ void Torol(const std::shared_ptr<Latnivalo> latnivalo)
 	for (; it < latnivalok.end(); it++)
 		(*it)->azon--;
 }
+
 void Hozzaad(const unsigned azon, std::string_view nev, const float hossz, const float szel, std::string_view katSzoveg, const float atlIdo, std::string_view leiras)
 {
 	std::shared_ptr<Latnivalo> latnivalo{std::make_shared<Latnivalo>(azon, nev, hossz, szel, katSzoveg, atlIdo, leiras)};
 	latnivalok.emplace_back(latnivalo);
 }
+
 void Betolt(const std::string &fajlNev)
 {
 	std::ifstream fajlBe(fajlNev);
@@ -87,8 +95,7 @@ void Betolt(const std::string &fajlNev)
 		}
 		fajlBe.close();
 	}
-	else
-	{
+	else {
 		std::cout << "A latnivalok.csv hiányzik!" << std::endl;
 		exit(-1);
 	}

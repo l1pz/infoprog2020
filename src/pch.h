@@ -1,17 +1,18 @@
-#include <iostream>
+// Függvények
 #include <algorithm>
-#include <memory>
-#include <utility>
 #include <clocale>
 #include <iomanip>
+#include <iostream>
+#include <memory>
 #include <regex>
+//#include <utility>
 
-#include <string>
-#include <vector>
-#include <sstream>
+// STL Tárolók
 #include <fstream>
-#include <unordered_map>
-#include <set>
-#include <unordered_set>
 #include <optional>
-
+#include <set>
+#include <sstream>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>

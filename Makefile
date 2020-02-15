@@ -9,29 +9,29 @@ ifndef verbose
 endif
 
 ifeq ($(config),debug)
-  Infoprog2020_config = debug
+  infoprog2020_config = debug
 
 else ifeq ($(config),release)
-  Infoprog2020_config = release
+  infoprog2020_config = release
 
 else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := Infoprog2020
+PROJECTS := infoprog2020
 
 .PHONY: all clean help $(PROJECTS) 
 
 all: $(PROJECTS)
 
-Infoprog2020:
-ifneq (,$(Infoprog2020_config))
-	@echo "==== Building Infoprog2020 ($(Infoprog2020_config)) ===="
-	@${MAKE} --no-print-directory -C Infoprog2020 -f Makefile config=$(Infoprog2020_config)
+infoprog2020:
+ifneq (,$(infoprog2020_config))
+	@echo "==== Building infoprog2020 ($(infoprog2020_config)) ===="
+	@${MAKE} --no-print-directory -C infoprog2020 -f Makefile config=$(infoprog2020_config)
 endif
 
 clean:
-	@${MAKE} --no-print-directory -C Infoprog2020 -f Makefile clean
+	@${MAKE} --no-print-directory -C infoprog2020 -f Makefile clean
 
 help:
 	@echo "Usage: make [config=name] [target]"
@@ -43,6 +43,6 @@ help:
 	@echo "TARGETS:"
 	@echo "   all (default)"
 	@echo "   clean"
-	@echo "   Infoprog2020"
+	@echo "   infoprog2020"
 	@echo ""
 	@echo "For more information, see https://github.com/premake/premake-core/wiki"
