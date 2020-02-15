@@ -5,21 +5,20 @@
 #include "Sight.h"
 
 namespace SightsManager {
-static std::vector<Sight> Sights;
+static std::vector<Sight> sights;
 
-std::optional<const Sight &> SearchID(const unsigned id) {
-  auto result{
-      std::find_if(Sights.begin(), Sights.end(),
-                   [id](const Sight &sight) { return sight.id == id; })};
-  if (result == Sights.end())
+std::optional<std::reference_wrapper<Sight>> SearchID(const unsigned id) {
+  auto result{std::find_if(sights.begin(), sights.end(),
+                           [id](Sight &sight) { return sight.id == id; })};
+  if (result == sights.end())
     return std::nullopt;
   return *result;
 }
 
-std::optional<std::vector<const Sight &>>
+std::optional<std::vector<std::reference_wrapper<Sight>>>
 SearchCategory(std::string_view category) {
-  std::vector<const Sight &> results;
-  for (auto &sight : Sights) {
+  std::vector<std::reference_wrapper<Sight>> results;
+  for (auto &sight : sights) {
     if (sight.category == category)
       results.emplace_back(sight);
   }
@@ -28,10 +27,11 @@ SearchCategory(std::string_view category) {
   return results;
 }
 
-std::optional<std::vector<const Sight &>> SearchText(std::string_view text) {
-  std::vector<const Sight &> results;
+std::optional<std::vector<std::reference_wrapper<Sight>>>
+SearchText(std::string_view text) {
+  std::vector<std::reference_wrapper<Sight>> results;
 
-  for (auto &sight : Sights) {
+  for (auto &sight : sights) {
     auto result = std::search(
         sight.name.begin(), sight.name.end(), text.begin(), text.end(),
         [](char a, char b) { return std::tolower(a) == std::tolower(b); });
@@ -45,17 +45,17 @@ std::optional<std::vector<const Sight &>> SearchText(std::string_view text) {
   return results;
 }
 
-void Delete(const Sight &sight) {
-  auto it = std::find(Sights.begin(), Sights.end(), sight);
-  Sights.erase(it);
-  for (; it != Sights.end(); it++)
+void Delete(Sight &sight) {
+  auto it = std::find(sights.begin(), sights.end(), sight);
+  sights.erase(it);
+  for (; it != sights.end(); it++)
     (*it).id--;
 }
 
 void Add(const unsigned id, std::string_view name, const float longtitude,
          const float latitude, std::string_view category, const float avgTime,
          std::string_view description) {
-  Sights.emplace_back(
+  sights.emplace_back(
       Sight(id, name, longtitude, latitude, category, avgTime, description));
 }
 
@@ -97,7 +97,7 @@ void Save(const std::string &fileName) {
   fileOutput << "azonosito;nev;hosszusag;szelesseg;kategoria;atlagos_ido;leiras"
              << std::endl;
   std::cout.precision(6);
-  for (auto &sight : Sights) {
+  for (auto &sight : sights) {
     fileOutput << sight.id << ';' << sight.name << ';' << std::fixed
                << sight.longtitude << ';' << std::fixed << sight.latitude << ';'
                << sight.category << ';' << std::fixed << sight.avgTime << ';'

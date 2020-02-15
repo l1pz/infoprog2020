@@ -1,10 +1,11 @@
 #include "pch.h"
 
-#include "LatnivaloKezelo.hpp"
+#include "SightsManager.hpp"
 
-using namespace LatnivaloKezelo;
+using namespace SightsManager;
 
 int main() {
-  Betolt("data/latnivalok.csv");
-  IO::Listaz(latnivalok);
+  Load("data/latnivalok.csv");
+  IO::List(sights);
+  std::cout << Sight::counter;
 }

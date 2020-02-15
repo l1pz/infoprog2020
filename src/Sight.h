@@ -6,11 +6,16 @@ struct Sight {
         const float latitude, std::string_view category, const float avgTime,
         const std::string_view description);
   Sight() = default;
+  inline Sight(const Sight &other) {}
   inline bool operator<(const Sight &other) const {
     return (this->id < other.id);
   }
+  inline bool operator==(const Sight &other) const {
+    return this->id == other.id;
+  }
 
   // Változók
+  static unsigned counter;
   unsigned id;
   std::string name;
   float longtitude;

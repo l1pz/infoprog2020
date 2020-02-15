@@ -66,8 +66,8 @@ endif
 
 OBJECTS :=
 
-OBJECTS += $(OBJDIR)/Latnivalo.o
 OBJECTS += $(OBJDIR)/Main.o
+OBJECTS += $(OBJDIR)/Sight.o
 
 # Rules
 # #############################################
@@ -129,10 +129,10 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/Latnivalo.o: ../src/Latnivalo.cpp
+$(OBJDIR)/Main.o: ../src/Main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Main.o: ../src/Main.cpp
+$(OBJDIR)/Sight.o: ../src/Sight.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
