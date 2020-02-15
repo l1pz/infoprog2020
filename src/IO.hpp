@@ -1,14 +1,14 @@
 #pragma once
 #include "pch.h"
 
-#include "Latnivalo.h"
+#include "Sight.h"
 
 namespace IO {
-template <class T> inline void Listaz(T latnivalok) {
-  unsigned sorszam{1};
-  for (auto &latnivalo : latnivalok) {
-    std::cout << std::setw(4) << sorszam << ": " << latnivalo->nev << std::endl;
-    sorszam++;
+template <class T> inline void List(T sights) {
+  unsigned number{1};
+  for (auto &sight : sights) {
+    std::cout << std::setw(4) << number << ": " << sight->name << std::endl;
+    number++;
   }
 }
 } // namespace IO
