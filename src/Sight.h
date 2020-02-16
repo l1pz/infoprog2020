@@ -1,12 +1,14 @@
 #pragma once
 
+namespace fs = std::filesystem;
+
 struct Sight {
   // Functions
   Sight(const unsigned id, std::string_view name, const float longtitude,
         const float latitude, std::string_view category, const float avgTime,
         const std::string_view description);
+
   Sight() = default;
-  inline Sight(const Sight &other) {}
   inline bool operator<(const Sight &other) const {
     return (this->id < other.id);
   }
@@ -15,7 +17,6 @@ struct Sight {
   }
 
   // Változók
-  static unsigned counter;
   unsigned id;
   std::string name;
   float longtitude;
@@ -23,5 +24,5 @@ struct Sight {
   std::string category;
   float avgTime;
   std::string description;
-  std::vector<std::string> images;
+  std::vector<fs::path> images;
 };

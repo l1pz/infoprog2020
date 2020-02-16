@@ -1,6 +1,7 @@
 // Függvények
 #include <algorithm>
 #include <clocale>
+#include <filesystem>
 #include <iomanip>
 #include <iostream>
 #include <memory>

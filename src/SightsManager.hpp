@@ -4,6 +4,8 @@
 #include "IO.hpp"
 #include "Sight.h"
 
+namespace fs = std::filesystem;
+
 namespace SightsManager {
 static std::vector<Sight> sights;
 
@@ -15,10 +17,10 @@ std::optional<std::reference_wrapper<Sight>> SearchID(const unsigned id) {
   return *result;
 }
 
-std::optional<std::vector<std::reference_wrapper<Sight>>>
+std::optional<std::vector<std::reference_wrapper<const Sight>>>
 SearchCategory(std::string_view category) {
-  std::vector<std::reference_wrapper<Sight>> results;
-  for (auto &sight : sights) {
+  std::vector<std::reference_wrapper<const Sight>> results;
+  for (const auto &sight : sights) {
     if (sight.category == category)
       results.emplace_back(sight);
   }
@@ -27,11 +29,11 @@ SearchCategory(std::string_view category) {
   return results;
 }
 
-std::optional<std::vector<std::reference_wrapper<Sight>>>
+std::optional<std::vector<std::reference_wrapper<const Sight>>>
 SearchText(std::string_view text) {
-  std::vector<std::reference_wrapper<Sight>> results;
+  std::vector<std::reference_wrapper<const Sight>> results;
 
-  for (auto &sight : sights) {
+  for (const auto &sight : sights) {
     auto result = std::search(
         sight.name.begin(), sight.name.end(), text.begin(), text.end(),
         [](char a, char b) { return std::tolower(a) == std::tolower(b); });
@@ -93,7 +95,7 @@ void Load(const std::string &fileName) {
 }
 
 void Save(const std::string &fileName) {
-  std::ofstream fileOutput(fileName);
+  std::ofstream fileOutput("data/" + fileName);
   fileOutput << "azonosito;nev;hosszusag;szelesseg;kategoria;atlagos_ido;leiras"
              << std::endl;
   std::cout.precision(6);
@@ -106,8 +108,24 @@ void Save(const std::string &fileName) {
   fileOutput.close();
 }
 
-void AddImage(Sight &sight, const std::string_view fileName) {
-  sight.images.emplace_back(fileName);
-}
+void AddImage(Sight &sight, const fs::path filePath) {
+  try {
+    if (fs::file_size(filePath) > 2000000) {
+      std::cout << "A fájl mérete túl nagy!" << std::endl;
+      exit(-1);
+    }
 
+    fs::path newPath{"data/images/" + std::to_string(sight.id) + "/"};
+    if (!fs::is_directory(newPath)) {
+      fs::create_directory(newPath);
+    }
+
+    fs::path newFilePath{newPath / filePath.filename()};
+    sight.images.emplace_back(newFilePath);
+    fs::copy_file(filePath, fs::current_path() / newFilePath,
+                  fs::copy_options::overwrite_existing);
+  } catch (fs::filesystem_error &e) {
+    std::cout << e.what() << std::endl;
+  }
+}
 } // namespace SightsManager

@@ -6,6 +6,6 @@ using namespace SightsManager;
 
 int main() {
   Load("data/latnivalok.csv");
-  IO::List(sights);
-  std::cout << Sight::counter;
+  AddImage(SearchID(1).value(),
+           "/home/l1pz/Pictures/Screenshot from 2020-01-28 14-50-16.png");
 }
