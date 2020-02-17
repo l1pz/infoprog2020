@@ -47,11 +47,15 @@ SearchText(std::string_view text) {
   return results;
 }
 
-void Delete(Sight &sight) {
+void Delete(const Sight &sight) {
   auto it = std::find(sights.begin(), sights.end(), sight);
-  sights.erase(it);
-  for (; it != sights.end(); it++)
-    (*it).id--;
+  fs::remove_all("data/images/" + std::to_string(it->id) + "/");
+  it = sights.erase(it);
+  for (; it != sights.end(); it++) {
+    fs::path sightDirOld{"data/images/" + std::to_string(it->id) + "/"};
+    fs::path sightDirNew{"data/images/" + std::to_string(--(it->id)) + "/"};
+    fs::rename(sightDirOld, sightDirNew);
+  }
 }
 
 void Add(const unsigned id, std::string_view name, const float longtitude,
@@ -61,8 +65,8 @@ void Add(const unsigned id, std::string_view name, const float longtitude,
       Sight(id, name, longtitude, latitude, category, avgTime, description));
 }
 
-void Load(const std::string &fileName) {
-  std::ifstream fileInput(fileName);
+void LoadCSV(const std::string &fileName) {
+  std::ifstream fileInput("data/" + fileName);
   if (fileInput) {
     bool header{true};
     std::string line;
@@ -94,7 +98,7 @@ void Load(const std::string &fileName) {
   }
 }
 
-void Save(const std::string &fileName) {
+void SaveCSV(const std::string &fileName) {
   std::ofstream fileOutput("data/" + fileName);
   fileOutput << "azonosito;nev;hosszusag;szelesseg;kategoria;atlagos_ido;leiras"
              << std::endl;
@@ -108,24 +112,54 @@ void Save(const std::string &fileName) {
   fileOutput.close();
 }
 
-void AddImage(Sight &sight, const fs::path filePath) {
+void SaveBinary(const std::string &fileName) {
+  std::ofstream fileOutput("data/" + fileName, std::ios::binary);
+  cereal::BinaryOutputArchive binaryArchive(fileOutput);
+  binaryArchive(sights);
+}
+
+void LoadBinary(const std::string &fileName) {
+  std::ifstream fileInput("data/" + fileName, std::ios::binary);
+  cereal::BinaryInputArchive binaryArchive(fileInput);
+  binaryArchive(sights);
+}
+
+void SaveJSON(const std::string &fileName) {
+  std::ofstream fileOutput("data/" + fileName);
+  cereal::JSONOutputArchive jsonArchive(fileOutput);
+  jsonArchive(CEREAL_NVP(sights));
+}
+
+void LoadJSON(const std::string &fileName) {
+  std::ifstream fileInput("data/" + fileName);
+  cereal::JSONInputArchive jsonArchive(fileInput);
+  jsonArchive(sights);
+}
+
+void AddImage(Sight &sight, const fs::path &imagePath) {
   try {
-    if (fs::file_size(filePath) > 2000000) {
+    if (fs::file_size(imagePath) > 2000000) {
       std::cout << "A fájl mérete túl nagy!" << std::endl;
       exit(-1);
     }
 
-    fs::path newPath{"data/images/" + std::to_string(sight.id) + "/"};
-    if (!fs::is_directory(newPath)) {
-      fs::create_directory(newPath);
+    fs::path sightDir{"data/images/" + std::to_string(sight.id) + "/"};
+    if (!fs::is_directory(sightDir)) {
+      fs::create_directory(sightDir);
     }
 
-    fs::path newFilePath{newPath / filePath.filename()};
-    sight.images.emplace_back(newFilePath);
-    fs::copy_file(filePath, fs::current_path() / newFilePath,
+    fs::path sightImagePath{sightDir / imagePath.filename()};
+    sight.images.insert(sightImagePath.string());
+    fs::copy_file(imagePath, fs::current_path() / sightImagePath,
                   fs::copy_options::overwrite_existing);
   } catch (fs::filesystem_error &e) {
     std::cout << e.what() << std::endl;
   }
 }
+
+void RemoveImage(Sight &sight, const fs::path &imagePath) {
+  sight.images.erase(imagePath.string());
+  fs::remove(imagePath);
+}
+
 } // namespace SightsManager

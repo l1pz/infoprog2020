@@ -5,7 +5,9 @@
 
 namespace IO {
 inline void ListElement(const Sight &sight, unsigned &number) {
-  std::cout << std::setw(4) << number << ": " << sight.name << std::endl;
+  std::cout << std::setw(4) << number << ": " << sight.name
+            << ", id:" << sight.id << ", lat:" << sight.latitude
+            << ", long:" << sight.longtitude << std::endl;
   number++;
 }
 

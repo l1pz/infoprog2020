@@ -1,11 +1,16 @@
 #include "pch.h"
 
+#include "RouteManager.hpp"
 #include "SightsManager.hpp"
 
 using namespace SightsManager;
+using namespace RouteManager;
 
 int main() {
-  Load("data/latnivalok.csv");
-  AddImage(SearchID(1).value(),
-           "/home/l1pz/Pictures/Screenshot from 2020-01-28 14-50-16.png");
+  LoadBinary("latnivalok.bin");
+  IO::List(sights);
+  SaveBinary("latnivalok.bin");
+
+  InitAPI();
+  GetRoute(19.846984, 48.144734, 19.849476, 48.140213);
 }

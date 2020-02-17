@@ -9,11 +9,19 @@ struct Sight {
         const std::string_view description);
 
   Sight() = default;
+
   inline bool operator<(const Sight &other) const {
     return (this->id < other.id);
   }
+
   inline bool operator==(const Sight &other) const {
     return this->id == other.id;
+  }
+
+  template <class Archive> void serialize(Archive &archive) {
+    archive(CEREAL_NVP(id), CEREAL_NVP(name), CEREAL_NVP(longtitude),
+            CEREAL_NVP(latitude), CEREAL_NVP(category), CEREAL_NVP(avgTime),
+            CEREAL_NVP(description), CEREAL_NVP(images));
   }
 
   // Variables
@@ -24,5 +32,5 @@ struct Sight {
   std::string category;
   float avgTime;
   std::string description;
-  std::vector<fs::path> images;
+  std::unordered_set<std::string> images;
 };

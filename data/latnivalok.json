@@ -1,0 +1,254 @@
+{
+    "sights": [
+        {
+            "id": 1,
+            "name": "Salgói vár",
+            "longtitude": 19.84698486328125,
+            "latitude": 4.591354418360263e-41,
+            "category": "műemlékek",
+            "avgTime": 1.0,
+            "description": "Salgóbánya kicsiny településének közelében, a Medves-fennsík 625 méter magas vulkáni csúcsát koronázza meg Salgó vára. Ebből a középkori várromból elképesztő kilátás nyílik a környező zöld erdőkre, és a Medves-fennsíkra.",
+            "images": []
+        },
+        {
+            "id": 2,
+            "name": "Boszorkánykő",
+            "longtitude": 19.849475860595704,
+            "latitude": 4.591354418360263e-41,
+            "category": "természeti kincsek",
+            "avgTime": 0.5,
+            "description": "Különös formájú szikla, ahol mélyből felszakított üledékzárványokat, hajlott lávalemezeket és bazaltoszlopokat láthatunk.",
+            "images": []
+        },
+        {
+            "id": 3,
+            "name": "Kercseg-lapos",
+            "longtitude": 19.796415328979493,
+            "latitude": 4.591354418360263e-41,
+            "category": "természeti kincsek",
+            "avgTime": 2.0,
+            "description": "A Karancs közkedvelt kirándulóhelye, évszázados, szép formájú gyertyánokkal, tölgyekkel és mezei juharokkal, jó vízű forrással.",
+            "images": []
+        },
+        {
+            "id": 4,
+            "name": "Medves-fennsík",
+            "longtitude": 19.872055053710939,
+            "latitude": 4.591354418360263e-41,
+            "category": "természeti kincsek",
+            "avgTime": 1.0,
+            "description": "A Medves-fennsík egy 520-570 méteres tengerszint feletti magasságban található bazalttakaró.",
+            "images": []
+        },
+        {
+            "id": 5,
+            "name": "Szilváskő",
+            "longtitude": 19.9022216796875,
+            "latitude": 4.591354418360263e-41,
+            "category": "természeti kincsek",
+            "avgTime": 2.5,
+            "description": "628 méter magas képződmény hatalmas dómként magasodik Szilváskő-puszta és a Bárna–patak völgyfője fölé.",
+            "images": []
+        },
+        {
+            "id": 6,
+            "name": "Baglyaskő-Vár Természetvédelmi Látogatóközpont",
+            "longtitude": 19.78969383239746,
+            "latitude": 4.591354418360263e-41,
+            "category": "múzeumok, információ",
+            "avgTime": 1.5,
+            "description": "Az egykor a Kacsics nemzetség által emelt Baglyaskő várának maradványai mellett található látogatóközpont vidékünk történelmi és természeti értékeit mutatja be.",
+            "images": []
+        },
+        {
+            "id": 7,
+            "name": "Bányamúzeum",
+            "longtitude": 19.799833297729493,
+            "latitude": 4.591354418360263e-41,
+            "category": "múzeumok, információ",
+            "avgTime": 2.0,
+            "description": "Az ország első, föld alatti bányamúzeuma, mely egy egykor működő bányarendszerben kapott helyet",
+            "images": []
+        },
+        {
+            "id": 8,
+            "name": "Geocsodák Háza",
+            "longtitude": 19.862165451049806,
+            "latitude": 4.591354418360263e-41,
+            "category": "múzeumok, információ",
+            "avgTime": 1.0,
+            "description": "A salgóbányai Geocsodák Háza a területre jellemző értékek bemutatásán túl, komplex szolgáltató szerepet lát el a térségben.",
+            "images": []
+        },
+        {
+            "id": 9,
+            "name": "Novohrad-Nógrád Geopark Eresztvényi Látogatóközpont",
+            "longtitude": 19.852693557739259,
+            "latitude": 4.591354418360263e-41,
+            "category": "múzeumok, információ",
+            "avgTime": 1.5,
+            "description": "A világ első határon átnyúló geoparkja, amelynek küldetése, hogy az egykor szétszakadt nógrádi tájat a geoturizmus komplex térségfejlesztési lehetőségeivel újra egyesítse.",
+            "images": []
+        },
+        {
+            "id": 10,
+            "name": "Uránia Észlelő és bemutató Csillagvizsgáló",
+            "longtitude": 19.820804595947267,
+            "latitude": 4.591354418360263e-41,
+            "category": "múzeumok, információ",
+            "avgTime": 2.0,
+            "description": "A távcsöves bemutatók alkalmával különféle nagyításokban láthatók a Hold kráterei, a bolygók, és a csillagos égbolt megannyi érdekessége. Előadásaink elsősorban az ismeretterjesztést, a tanulást segítik, megismertetve ezzel is a csillagászat és az űrkutatás legújabb eredményeit.",
+            "images": []
+        },
+        {
+            "id": 11,
+            "name": "Vadaspark",
+            "longtitude": 19.85161018371582,
+            "latitude": 4.591354418360263e-41,
+            "category": "múzeumok, információ",
+            "avgTime": 1.5,
+            "description": "A környék növényevő és mindenevő nagyvadjai egy helyen tekinthetők meg.",
+            "images": []
+        },
+        {
+            "id": 12,
+            "name": "Közép-bányató",
+            "longtitude": 19.867916107177736,
+            "latitude": 4.591354418360263e-41,
+            "category": "természeti kincsek",
+            "avgTime": 0.5,
+            "description": "A három oldalról magas, függőleges bazaltsziklafallal határolt, vadregényes tájba illő tó minden évszakban lenyűgöző látványt nyújt.",
+            "images": []
+        },
+        {
+            "id": 13,
+            "name": "Dornyay Turistaház ",
+            "longtitude": 19.846027374267579,
+            "latitude": 4.591354418360263e-41,
+            "category": "műemlékek",
+            "avgTime": 0.25,
+            "description": "A Salgó Menedékház 1965-ben vette fel a Dornyay turistaház nevet. Még vagy húsz évig környékbeli túrák kiindulópontja volt, a sípálya is üzemelt, felvonó is volt mellette. A turistaház az 1990-es évek első felében még működött, voltak próbálkozások a fenntartására.",
+            "images": []
+        },
+        {
+            "id": 14,
+            "name": "Petőfi-forrás",
+            "longtitude": 19.856916427612306,
+            "latitude": 4.591354418360263e-41,
+            "category": "természeti kincsek",
+            "avgTime": 0.25,
+            "description": "Petőfi Sándor 1845 nyarán felvidéki barangolásai során látogatott el Somoskő és Salgó vidékére. A költő emlékét őrző hálás utókor az Eresztvény és Somoskő Magyar-bánya közötti egykori vasúti pálya kényelmes sétával bejárható nyomvonalát Petőfi sétánynak nevezte el.",
+            "images": []
+        },
+        {
+            "id": 15,
+            "name": "Gortva vízesés",
+            "longtitude": 19.891582489013673,
+            "latitude": 4.591354418360263e-41,
+            "category": "természeti kincsek",
+            "avgTime": 0.25,
+            "description": "A Gortva-patak jó része, így a vízesés is fokozottan védett természetvédelmi területen található. Megközelítése képzett és engedéllyel rendelkező túravezetővel lehetséges ",
+            "images": []
+        },
+        {
+            "id": 16,
+            "name": "Tehenesi bányató",
+            "longtitude": 19.88800048828125,
+            "latitude": 4.591354418360263e-41,
+            "category": "természeti kincsek",
+            "avgTime": 0.25,
+            "description": "A bánya területén keletkezett tó a kirándulások kedvelt célpontja",
+            "images": []
+        },
+        {
+            "id": 17,
+            "name": "Salakhegyek",
+            "longtitude": 19.85563850402832,
+            "latitude": 4.591354418360263e-41,
+            "category": "természeti kincsek",
+            "avgTime": 0.5,
+            "description": "Megjelenésük és méretük valamint megközelítésük miatt, ezek a mesterséges csúcsok is célpontok a kirándulások során.",
+            "images": []
+        },
+        {
+            "id": 18,
+            "name": "Mogyorósi kilátó",
+            "longtitude": 19.88458251953125,
+            "latitude": 4.591354418360263e-41,
+            "category": "kilátó",
+            "avgTime": 0.5,
+            "description": "A Rónafalu felett magasodó Mogyorósi-kilátóról fantasztikus panoráma tárul a szemünk elé. Könnyen megközelíthető kilátó, gyalogosan is Rónafaluból, de akár autóval is el lehet menni a kilátó közvetlen közelébe.",
+            "images": []
+        },
+        {
+            "id": 19,
+            "name": "Zagyva-forrás",
+            "longtitude": 19.871444702148439,
+            "latitude": 4.591354418360263e-41,
+            "category": "természeti kincsek",
+            "avgTime": 0.25,
+            "description": "A Zagyva forrása a Medves hegység lejtőjén Salgóbányától délre található, kb. 500 méter tengerszint feletti magasságban, a Karancs-Medves Tájvédelmi Körzet területén.",
+            "images": []
+        },
+        {
+            "id": 20,
+            "name": "Zenthe Ferenc emlékpark",
+            "longtitude": 19.860055923461915,
+            "latitude": 4.591354418360263e-41,
+            "category": "múzeumok, információ",
+            "avgTime": 0.5,
+            "description": "Zenthe Ferenc a Nemzet Színésze címmel kitüntetett, Kossuth-díjas és kétszeres Jászai Mari-díjas magyar színművész, érdemes és kiváló művész. Szülőfalujában, Salgóbányán, emlékparkot alapítottak tiszteletére",
+            "images": []
+        },
+        {
+            "id": 21,
+            "name": "Kőpark",
+            "longtitude": 19.857221603393556,
+            "latitude": 4.591354418360263e-41,
+            "category": "múzeumok, információ",
+            "avgTime": 0.5,
+            "description": "A hajdani Magyar-bánya meddőhányóján kialakított kőparkban a környék (Nógrád) jellegzetes kőzeteit gyűjtötték össze.",
+            "images": []
+        },
+        {
+            "id": 22,
+            "name": "Tarján Glass Látogatóközpont",
+            "longtitude": 19.783193588256837,
+            "latitude": 4.591354418360263e-41,
+            "category": "múzeumok, információ",
+            "avgTime": 1.25,
+            "description": "Magyarországon először komplex üvegipari látogatóközponttal várjuk az üveggyártás iránt érdeklődőket: üvegmúzeum, gyárlátogatás és mintabolt várja az ide látogatókat.",
+            "images": []
+        },
+        {
+            "id": 23,
+            "name": "Balázs János szabadtéri kiállítás",
+            "longtitude": 19.80758285522461,
+            "latitude": 4.591354418360263e-41,
+            "category": "múzeumok, információ",
+            "avgTime": 0.25,
+            "description": "A kiállítás a Sakkozzuk ki! városszépítő egyesület és a Dornyay Béla Múzeum közös szervezésében jött létre.",
+            "images": []
+        },
+        {
+            "id": 24,
+            "name": "Dornyay Béla Múzeum",
+            "longtitude": 19.805500030517579,
+            "latitude": 4.591354418360263e-41,
+            "category": "múzeumok, információ",
+            "avgTime": 2.0,
+            "description": "Széles körű állandó kiállítások, valamint igényes, gazdag anyagú időszakos kiállítások várják a látogatókat a salgótarjáni Dornyay Béla Múzeumban.",
+            "images": []
+        },
+        {
+            "id": 25,
+            "name": "Hármashalom kilátó",
+            "longtitude": 19.802305221557618,
+            "latitude": 4.591354418360263e-41,
+            "category": "kilátó",
+            "avgTime": 0.75,
+            "description": "A salgótarjáni Országzászló Emlékhely tervezését annak idején Makovecz Imre kezdte meg, de a művész halála miatt tanítványai véglegesítették a terveket. A partizán emlékmű, a “Pléh Öcsi” helyén 2012. június 3-án, az összetartozás napja alkalmából avatták fel az új Országzászló Emlékhelyet.",
+            "images": []
+        }
+    ]
+}
