@@ -9,7 +9,9 @@ static httplib::Headers headers;
 void InitAPI() {
   std::ifstream inputFile(".env");
   inputFile >> apiKey;
-  headers = {{"Authorization", apiKey}};
+  headers = {{"Accept", "application/json, application/geo+json, "
+                        "application/gpx+xml, img/png; charset=utf-8"},
+             {"Authorization", apiKey}};
 }
 
 std::string GetCoordinateString(float latitude, float longtitude) {
@@ -21,7 +23,10 @@ void GetRoute(float startLatitude, float startLongtitude, float endLatitude,
   auto start = GetCoordinateString(startLatitude, startLongtitude);
   auto end = GetCoordinateString(endLatitude, endLongtitude);
   httplib::Params params{{"api_key", apiKey}, {"start", start}, {"end", end}};
-  auto route = cli.Post("/v2/directions/foot-hiking", headers, params);
+  auto route = cli.Post("/v2/directions/foot-hiking", headers,
+                        "{\"coordinates\":[[8.681495,49.41461],[8.686507,49."
+                        "41943],[8.687872,49.420318]]}",
+                        "application/json; charset=utf-8");
   std::cout << route->body;
   /*if (route) {
     std::cout << route->body << std::endl;

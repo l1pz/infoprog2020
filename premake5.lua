@@ -2,8 +2,8 @@ workspace "infoprog2020"
 architecture "x86_64"
 
 configurations {
-	"debug",
-	"release"
+  "debug",
+  "release"
 }
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
@@ -18,10 +18,10 @@ objdir("bin-obj/" .. outputdir)
 includedirs {"src/libs"}
 
 files {
-	"src/**.h",
-	"src/**.cpp",
-	"src/**.hpp",
-	"src/**.c"
+  "src/**.h",
+  "src/**.cpp",
+  "src/**.hpp",
+  "src/**.c"
 }
 
 pchheader "src/pch.h"
@@ -39,12 +39,12 @@ filter "configurations:Release"
 optimize "on"
 
 newaction {
-	trigger = "clean",
-	description = "clean the software",
-	execute = function()
-		print("clean the build...")
-		os.rmdir("./bin-obj")
-		os.rmdir("./bin")
-		print("done.")
-	end
+  trigger = "clean",
+  description = "clean the software",
+  execute = function()
+    print("clean the build...")
+    os.rmdir("./bin-obj")
+    os.rmdir("./bin")
+    print("done.")
+  end
 }
