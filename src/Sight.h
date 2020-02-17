@@ -16,7 +16,7 @@ struct Sight {
     return this->id == other.id;
   }
 
-  // Változók
+  // Variables
   unsigned id;
   std::string name;
   float longtitude;
