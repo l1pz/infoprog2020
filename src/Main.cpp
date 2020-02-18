@@ -8,20 +8,14 @@ using namespace RouteManager;
 
 int main() {
   LoadBinary("latnivalok.bin");
-  // IO::List(sights);
-  // SaveBinary("latnivalok.bin");
-
-  InitAPI();
+  auto route = GenerateRoute(sights);
+  IO::List(route.first);
+  std::cout << "Becsült idő: " << route.second << std::endl;
   std::vector<std::pair<float, float>> coordinates;
-  for (auto &sight : sights) {
-    coordinates.push_back({std::make_pair(sight.latitude, sight.longtitude)});
+  for (auto sight : route.first) {
+    coordinates.emplace_back(
+        std::make_pair(sight->longtitude, sight->latitude));
   }
-  std::cout << EstimateDistance(
-                   coordinates.front().first, coordinates.front().second,
-                   coordinates.back().first, coordinates.back().second)
-            << std::endl;
-
-  std::cout << coordinates.front().first << " " << coordinates.front().second
-            << " " << coordinates.back().first << " "
-            << coordinates.back().second << std::endl;
+  InitAPI();
+  GetRouteLenght(coordinates);
 }

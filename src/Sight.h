@@ -2,7 +2,7 @@
 
 namespace fs = std::filesystem;
 
-struct Sight {
+struct Sight : std::enable_shared_from_this<Sight> {
   // Functions
   Sight(const unsigned id, std::string_view name, const float longtitude,
         const float latitude, std::string_view category, const float avgTime,
@@ -11,7 +11,7 @@ struct Sight {
   Sight() = default;
 
   inline bool operator<(const Sight &other) const {
-    return (this->id < other.id);
+    return this->id < other.id;
   }
 
   inline bool operator==(const Sight &other) const {

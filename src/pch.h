@@ -18,6 +18,7 @@
 
 #include "libs/cereal/archives/binary.hpp"
 #include "libs/cereal/archives/json.hpp"
+#include "libs/cereal/types/memory.hpp"
 #include "libs/cereal/types/string.hpp"
 #include "libs/cereal/types/unordered_set.hpp"
 #include "libs/cereal/types/vector.hpp"
