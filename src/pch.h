@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <clocale>
+#include <cmath>
 #include <filesystem>
 #include <iomanip>
 #include <iostream>

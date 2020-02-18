@@ -7,10 +7,21 @@ using namespace SightsManager;
 using namespace RouteManager;
 
 int main() {
-  /*LoadBinary("latnivalok.csv");
-  IO::List(sights);
-  SaveBinary("latnivalok.bin");*/
+  LoadBinary("latnivalok.bin");
+  // IO::List(sights);
+  // SaveBinary("latnivalok.bin");
 
   InitAPI();
-  GetRoute(19.846984, 48.144734, 19.849476, 48.140213);
+  std::vector<std::pair<float, float>> coordinates;
+  for (auto &sight : sights) {
+    coordinates.push_back({std::make_pair(sight.latitude, sight.longtitude)});
+  }
+  std::cout << EstimateDistance(
+                   coordinates.front().first, coordinates.front().second,
+                   coordinates.back().first, coordinates.back().second)
+            << std::endl;
+
+  std::cout << coordinates.front().first << " " << coordinates.front().second
+            << " " << coordinates.back().first << " "
+            << coordinates.back().second << std::endl;
 }
