@@ -15,7 +15,9 @@ language "C++"
 
 targetdir("bin/" .. outputdir)
 objdir("bin-obj/" .. outputdir)
-includedirs {"src/libs"}
+includedirs {"includes/"}
+libdirs {"libs/"}
+links {"nana"}
 
 files {
   "src/**.h",

@@ -16,11 +16,15 @@
 #include <unordered_set>
 #include <vector>
 
-#include "libs/cereal/archives/binary.hpp"
-#include "libs/cereal/archives/json.hpp"
-#include "libs/cereal/types/memory.hpp"
-#include "libs/cereal/types/string.hpp"
-#include "libs/cereal/types/unordered_set.hpp"
-#include "libs/cereal/types/vector.hpp"
+#include "cereal/archives/binary.hpp"
+#include "cereal/archives/json.hpp"
+#include "cereal/types/memory.hpp"
+#include "cereal/types/string.hpp"
+#include "cereal/types/unordered_set.hpp"
+#include "cereal/types/vector.hpp"
 
-#include "libs/httplib/httplib.h"
+#include "httplib/httplib.h"
+
+#include "nana/gui.hpp"
+#include "nana/gui/widgets/button.hpp"
+#include "nana/gui/widgets/label.hpp"
