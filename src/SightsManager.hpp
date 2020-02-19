@@ -69,9 +69,10 @@ void Add(const unsigned id, std::string_view name, const float longtitude,
                                               category, avgTime, description));
 }
 
-void LoadCSV(const std::string &fileName) {
-  std::ifstream fileInput("data/" + fileName);
+void LoadCSV(const fs::path &filePath) {
+  std::ifstream fileInput(filePath);
   if (fileInput) {
+    std::cout << "load succ" << std::endl;
     bool header{true};
     std::string line;
     while (std::getline(fileInput, line)) {
@@ -98,12 +99,11 @@ void LoadCSV(const std::string &fileName) {
     fileInput.close();
   } else {
     std::cout << "A latnivalok.csv hiányzik!" << std::endl;
-    exit(-1);
   }
 }
 
-void SaveCSV(const std::string &fileName) {
-  std::ofstream fileOutput("data/" + fileName);
+void SaveCSV(const fs::path &filePath) {
+  std::ofstream fileOutput(filePath);
   fileOutput << "azonosito;nev;hosszusag;szelesseg;kategoria;atlagos_ido;leiras"
              << std::endl;
   std::cout.precision(6);

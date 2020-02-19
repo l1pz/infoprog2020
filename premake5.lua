@@ -32,7 +32,11 @@ cppdialect "C++17"
 staticruntime "on"
 
 filter "system:Windows"
-systemversion "latest" -- To use the latest version of the SDK available
+systemversion "latest"
+
+filter "system:Linux"
+linkoptions "-pthread"
+links {"X11", "pthread", "rt", "Xft", "png", "asound", "fontconfig"}
 
 filter "configurations:Debug"
 symbols "on"

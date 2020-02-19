@@ -27,7 +27,7 @@ INCLUDES += -I../includes
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-LIBS += -lnana
+LIBS += -lnana -lX11 -lpthread -lrt -lXft -lpng -lasound -lfontconfig
 LDDEPS +=
 LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
 define PREBUILDCMDS
@@ -43,7 +43,7 @@ TARGET = $(TARGETDIR)/infoprog2020
 OBJDIR = ../bin-obj/debug-linux-x86_64
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++17
-ALL_LDFLAGS += $(LDFLAGS) -L../libs -L/usr/lib64 -m64
+ALL_LDFLAGS += $(LDFLAGS) -L../libs -L/usr/lib64 -m64 -pthread
 
 else ifeq ($(config),release)
 TARGETDIR = ../bin/release-linux-x86_64
@@ -51,7 +51,7 @@ TARGET = $(TARGETDIR)/infoprog2020
 OBJDIR = ../bin-obj/release-linux-x86_64
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++17
-ALL_LDFLAGS += $(LDFLAGS) -L../libs -L/usr/lib64 -m64 -s
+ALL_LDFLAGS += $(LDFLAGS) -L../libs -L/usr/lib64 -m64 -s -pthread
 
 else
   $(error "invalid configuration $(config)")
