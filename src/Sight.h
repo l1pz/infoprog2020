@@ -24,6 +24,23 @@ struct Sight : std::enable_shared_from_this<Sight> {
             CEREAL_NVP(description), CEREAL_NVP(images));
   }
 
+  friend nana::listbox::oresolver &operator<<(nana::listbox::oresolver &orr,
+                                              const Sight &sight) {
+    orr << sight.name;
+    return orr;
+  }
+
+  friend std::ostream &operator<<(std::ostream &orr, const Sight &sight) {
+    orr << sight.name;
+    return orr;
+  }
+
+  friend nana::listbox::iresolver &operator>>(nana::listbox::iresolver &orr,
+                                              Sight &sight) {
+    orr >> sight.name;
+    return orr;
+  }
+
   // Variables
   unsigned id;
   std::string name;

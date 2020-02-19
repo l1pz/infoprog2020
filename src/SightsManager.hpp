@@ -53,12 +53,15 @@ void Delete(const Sight &sight) {
                          [sight](std::shared_ptr<Sight> otherSight) {
                            return otherSight->id == sight.id;
                          });
+  assert(it != sights.end());
   fs::remove_all("data/images/" + std::to_string((*it)->id) + "/");
   it = sights.erase(it);
   for (; it != sights.end(); it++) {
     fs::path sightDirOld{"data/images/" + std::to_string((*it)->id) + "/"};
     fs::path sightDirNew{"data/images/" + std::to_string(--(*it)->id) + "/"};
-    fs::rename(sightDirOld, sightDirNew);
+    if (fs::is_directory(sightDirOld)) {
+      fs::rename(sightDirOld, sightDirNew);
+    }
   }
 }
 
@@ -69,7 +72,10 @@ void Add(const unsigned id, std::string_view name, const float longtitude,
                                               category, avgTime, description));
 }
 
+inline void Clear() { sights.clear(); }
+
 void LoadCSV(const fs::path &filePath) {
+  Clear();
   std::ifstream fileInput(filePath);
   if (fileInput) {
     bool header{true};
@@ -122,6 +128,7 @@ void SaveBinary(const fs::path &filePath) {
 }
 
 void LoadBinary(const fs::path &filePath) {
+  Clear();
   std::ifstream fileInput(filePath, std::ios::binary);
   cereal::BinaryInputArchive binaryArchive(fileInput);
   binaryArchive(sights);
@@ -134,6 +141,7 @@ void SaveJSON(const fs::path &filePath) {
 }
 
 void LoadJSON(const fs::path &filePath) {
+  Clear();
   std::ifstream fileInput(filePath);
   cereal::JSONInputArchive jsonArchive(fileInput);
   jsonArchive(sights);

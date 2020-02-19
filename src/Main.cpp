@@ -16,7 +16,7 @@ void handler(menu::item_proxy &ip) {
 int main() {
   LoadBinary(fs::current_path() / "data/latnivalok.bin");
   form fm;
-  fm.div(R"~(vert <menuBar weight=28><sightList>)~");
+  fm.div(R"~(vert <menuBar weight=28><<weight=60% sightList><controlPanel>>)~");
   fm.caption("Látnivaló Kezelő");
   fm.events().unload([](const arg_unload &arg) {
     nana::msgbox mb(arg.window_handle, "Kilépés", msgbox::yes_no);
@@ -25,12 +25,12 @@ int main() {
     arg.cancel = (mb.show() != msgbox::pick_yes);
   });
   menubar mb{fm};
-  auto &filemenu = mb.push_back("Fájl");
-  filemenu.append("Mentés", [fm](menu::item_proxy &ip) {
+  auto &fileMenu = mb.push_back("Fájl");
+  fileMenu.append("Mentés", [fm](menu::item_proxy &ip) {
     SaveBinary(fs::current_path() / "data/latnivalok.bin");
   });
-  filemenu.append_splitter();
-  filemenu.append("Importálás CSV-ből", [fm](menu::item_proxy &ip) {
+  fileMenu.append_splitter();
+  fileMenu.append("Importálás CSV-ből", [fm](menu::item_proxy &ip) {
     filebox picker{fm, true};
     picker.allow_multi_select(false);
     auto paths = picker.show();
@@ -39,7 +39,7 @@ int main() {
       LoadCSV(paths.front());
     }
   });
-  filemenu.append("Exportálás CSV-be", [fm](menu::item_proxy &ip) {
+  fileMenu.append("Exportálás CSV-be", [fm](menu::item_proxy &ip) {
     filebox picker{fm, false};
     picker.allow_multi_select(false);
     auto paths = picker.show();
@@ -48,8 +48,9 @@ int main() {
       SaveCSV(paths.front());
     }
   });
-  filemenu.append_splitter();
-  filemenu.append("Kilépés", [fm](menu::item_proxy &ip) {
+  fileMenu.enabled(3, false);
+  fileMenu.append_splitter();
+  fileMenu.append("Kilépés", [fm](menu::item_proxy &ip) {
     nana::msgbox mb(fm, "Kilépés", msgbox::yes_no);
     mb.icon(mb.icon_question);
     mb << "Biztosan kilép?";
@@ -61,22 +62,39 @@ int main() {
   helpmenu.append("Rólunk", handler);
 
   listbox lsbox(fm);
-  lsbox.append_header("Név");
-  auto value_translator = [](const std::vector<nana::listbox::cell> &cells) {
-    return std::shared_ptr<Sight>();
-  };
-  auto cell_translator = [](const std::shared_ptr<Sight> s) {
-    std::vector<nana::listbox::cell> cells;
-    cells.emplace_back(s->name);
-    return cells;
-  };
-  lsbox.at(0).shared_model<std::recursive_mutex>(sights, value_translator,
-                                                 cell_translator);
+  lsbox.enable_single(true, true);
+  lsbox.append_header("Látványosság");
+  for (auto &sight : sights) {
+    lsbox.at(0).append(*sight).value(sight);
+  }
+  lsbox.column_at(0).fit_content();
+
+  lsbox.events().selected([](const arg_listbox &arg) {
+    if (arg.item.selected()) {
+      arg.item.fgcolor(colors::blue);
+    } else {
+      arg.item.fgcolor(colors::black);
+    };
+  });
+
+  button db(fm);
+  db.caption("Törlés");
+  db.events().click([&lsbox](const arg_click &arg) {
+    if (lsbox.selected().empty())
+      return;
+    auto &selected = lsbox.at(0)
+                         .at(lsbox.selected().front().item)
+                         .value<std::shared_ptr<Sight>>();
+    Delete(*selected);
+    lsbox.erase(lsbox.selected());
+    std::cout << sights.size() << std::endl;
+  });
 
   fm["menuBar"] << mb;
   fm["sightList"] << lsbox;
+  fm["controlPanel"] << db;
   fm.collocate();
 
   fm.show();
-  exec();
+  nana::exec();
 }
