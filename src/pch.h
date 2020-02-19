@@ -8,6 +8,7 @@
 #include <regex>
 
 #include <fstream>
+#include <mutex>
 #include <optional>
 #include <set>
 #include <sstream>
@@ -29,4 +30,5 @@
 #include "nana/gui/filebox.hpp"
 #include "nana/gui/widgets/button.hpp"
 #include "nana/gui/widgets/label.hpp"
+#include "nana/gui/widgets/listbox.hpp"
 #include "nana/gui/widgets/menubar.hpp"

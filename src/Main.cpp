@@ -14,8 +14,9 @@ void handler(menu::item_proxy &ip) {
 };
 
 int main() {
-
+  LoadBinary(fs::current_path() / "data/latnivalok.bin");
   form fm;
+  fm.div(R"~(vert <menuBar weight=28><sightList>)~");
   fm.caption("Látnivaló Kezelő");
   fm.events().unload([](const arg_unload &arg) {
     nana::msgbox mb(arg.window_handle, "Kilépés", msgbox::yes_no);
@@ -26,7 +27,7 @@ int main() {
   menubar mb{fm};
   auto &filemenu = mb.push_back("Fájl");
   filemenu.append("Mentés", [fm](menu::item_proxy &ip) {
-    SaveBinary("data/latnivalok.bin");
+    SaveBinary(fs::current_path() / "data/latnivalok.bin");
   });
   filemenu.append_splitter();
   filemenu.append("Importálás CSV-ből", [fm](menu::item_proxy &ip) {
@@ -58,6 +59,24 @@ int main() {
   });
   auto &helpmenu = mb.push_back("Segítség");
   helpmenu.append("Rólunk", handler);
+
+  listbox lsbox(fm);
+  lsbox.append_header("Név");
+  auto value_translator = [](const std::vector<nana::listbox::cell> &cells) {
+    return std::shared_ptr<Sight>();
+  };
+  auto cell_translator = [](const std::shared_ptr<Sight> s) {
+    std::vector<nana::listbox::cell> cells;
+    cells.emplace_back(s->name);
+    return cells;
+  };
+  lsbox.at(0).shared_model<std::recursive_mutex>(sights, value_translator,
+                                                 cell_translator);
+
+  fm["menuBar"] << mb;
+  fm["sightList"] << lsbox;
+  fm.collocate();
+
   fm.show();
   exec();
 }

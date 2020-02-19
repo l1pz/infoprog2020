@@ -72,7 +72,6 @@ void Add(const unsigned id, std::string_view name, const float longtitude,
 void LoadCSV(const fs::path &filePath) {
   std::ifstream fileInput(filePath);
   if (fileInput) {
-    std::cout << "load succ" << std::endl;
     bool header{true};
     std::string line;
     while (std::getline(fileInput, line)) {
@@ -116,26 +115,26 @@ void SaveCSV(const fs::path &filePath) {
   fileOutput.close();
 }
 
-void SaveBinary(const std::string &fileName) {
-  std::ofstream fileOutput("data/" + fileName, std::ios::binary);
+void SaveBinary(const fs::path &filePath) {
+  std::ofstream fileOutput(filePath, std::ios::binary);
   cereal::BinaryOutputArchive binaryArchive(fileOutput);
   binaryArchive(sights);
 }
 
-void LoadBinary(const std::string &fileName) {
-  std::ifstream fileInput("data/" + fileName, std::ios::binary);
+void LoadBinary(const fs::path &filePath) {
+  std::ifstream fileInput(filePath, std::ios::binary);
   cereal::BinaryInputArchive binaryArchive(fileInput);
   binaryArchive(sights);
 }
 
-void SaveJSON(const std::string &fileName) {
-  std::ofstream fileOutput("data/" + fileName);
+void SaveJSON(const fs::path &filePath) {
+  std::ofstream fileOutput(filePath);
   cereal::JSONOutputArchive jsonArchive(fileOutput);
   jsonArchive(CEREAL_NVP(sights));
 }
 
-void LoadJSON(const std::string &fileName) {
-  std::ifstream fileInput("data/" + fileName);
+void LoadJSON(const fs::path &filePath) {
+  std::ifstream fileInput(filePath);
   cereal::JSONInputArchive jsonArchive(fileInput);
   jsonArchive(sights);
 }
