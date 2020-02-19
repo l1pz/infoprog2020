@@ -16,6 +16,7 @@ void handler(menu::item_proxy &ip) {
 int main() {
   LoadBinary(fs::current_path() / "data/latnivalok.bin");
   form fm;
+  listbox lsbox(fm);
   fm.div(R"~(vert <menuBar weight=28><<weight=60% sightList><controlPanel>>)~");
   fm.caption("Látnivaló Kezelő");
   fm.events().unload([](const arg_unload &arg) {
@@ -30,16 +31,21 @@ int main() {
     SaveBinary(fs::current_path() / "data/latnivalok.bin");
   });
   fileMenu.append_splitter();
-  fileMenu.append("Importálás CSV-ből", [fm](menu::item_proxy &ip) {
+  fileMenu.append("Importálás CSV-ből", [&fm, &lsbox](menu::item_proxy &ip) {
     filebox picker{fm, true};
     picker.allow_multi_select(false);
     auto paths = picker.show();
     if (!paths.empty()) {
       std::cout << paths.front() << std::endl;
       LoadCSV(paths.front());
+      lsbox.erase(0);
+      for (auto &sight : sights) {
+        lsbox.at(0).append(*sight).value(sight);
+      }
+      lsbox.column_at(0).fit_content();
     }
   });
-  fileMenu.append("Exportálás CSV-be", [fm](menu::item_proxy &ip) {
+  fileMenu.append("Exportálás CSV-be", [&fm](menu::item_proxy &ip) {
     filebox picker{fm, false};
     picker.allow_multi_select(false);
     auto paths = picker.show();
@@ -48,9 +54,8 @@ int main() {
       SaveCSV(paths.front());
     }
   });
-  fileMenu.enabled(3, false);
   fileMenu.append_splitter();
-  fileMenu.append("Kilépés", [fm](menu::item_proxy &ip) {
+  fileMenu.append("Kilépés", [&fm](menu::item_proxy &ip) {
     nana::msgbox mb(fm, "Kilépés", msgbox::yes_no);
     mb.icon(mb.icon_question);
     mb << "Biztosan kilép?";
@@ -61,7 +66,6 @@ int main() {
   auto &helpmenu = mb.push_back("Segítség");
   helpmenu.append("Rólunk", handler);
 
-  listbox lsbox(fm);
   lsbox.enable_single(true, true);
   lsbox.append_header("Látványosság");
   for (auto &sight : sights) {
