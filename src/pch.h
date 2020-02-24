@@ -29,6 +29,7 @@
 #include "nana/gui.hpp"
 #include "nana/gui/filebox.hpp"
 #include "nana/gui/widgets/button.hpp"
+#include "nana/gui/widgets/combox.hpp"
 #include "nana/gui/widgets/label.hpp"
 #include "nana/gui/widgets/listbox.hpp"
 #include "nana/gui/widgets/menubar.hpp"

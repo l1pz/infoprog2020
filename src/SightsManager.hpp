@@ -8,6 +8,7 @@ namespace fs = std::filesystem;
 
 namespace SightsManager {
 static std::vector<std::shared_ptr<Sight>> sights;
+static std::unordered_set<std::string> categories;
 
 std::optional<std::shared_ptr<Sight>> SearchID(const unsigned id) {
   auto result{std::find_if(
@@ -74,6 +75,12 @@ void Add(const unsigned id, std::string_view name, const float longtitude,
 
 inline void Clear() { sights.clear(); }
 
+void PostLoad() {
+  for (auto &sight : sights) {
+    categories.insert(std::string(sight->category));
+  }
+}
+
 void LoadCSV(const fs::path &filePath) {
   Clear();
   std::ifstream fileInput(filePath);
@@ -102,6 +109,7 @@ void LoadCSV(const fs::path &filePath) {
       Add(id, name, longtitude, latitude, category, avgTime, description);
     }
     fileInput.close();
+    PostLoad();
   } else {
     std::cout << "A latnivalok.csv hiányzik!" << std::endl;
   }
@@ -132,6 +140,7 @@ void LoadBinary(const fs::path &filePath) {
   std::ifstream fileInput(filePath, std::ios::binary);
   cereal::BinaryInputArchive binaryArchive(fileInput);
   binaryArchive(sights);
+  PostLoad();
 }
 
 void SaveJSON(const fs::path &filePath) {
@@ -145,6 +154,7 @@ void LoadJSON(const fs::path &filePath) {
   std::ifstream fileInput(filePath);
   cereal::JSONInputArchive jsonArchive(fileInput);
   jsonArchive(sights);
+  PostLoad();
 }
 
 void AddImage(Sight &sight, const fs::path &imagePath) {

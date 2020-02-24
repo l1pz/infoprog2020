@@ -50,7 +50,6 @@ int main() {
     picker.allow_multi_select(false);
     auto paths = picker.show();
     if (!paths.empty()) {
-      std::cout << paths.front() << std::endl;
       LoadCSV(paths.front());
       list.erase(0);
       for (auto &sight : sights) {
@@ -64,7 +63,6 @@ int main() {
     picker.allow_multi_select(false);
     auto paths = picker.show();
     if (!paths.empty()) {
-      std::cout << paths.front() << std::endl;
       SaveCSV(paths.front());
     }
   });
@@ -110,7 +108,6 @@ int main() {
     auto selected = getSelectedSight(list);
     Delete(*selected);
     list.erase(list.selected());
-    std::cout << sights.size() << std::endl;
   });
 
   button addButton(fm);
@@ -118,6 +115,88 @@ int main() {
 
   button modifyButton(fm);
   modifyButton.caption("Kijelölt módosítása");
+  modifyButton.events().click([&list, &fm](const arg_click &arg) {
+    if (list.selected().empty())
+      return;
+    auto selected = getSelectedSight(list);
+    form modFm(fm, {500, 400});
+    modFm.caption("Módosítás");
+    modFm.div(
+        R"~(
+        <vert margin = 20
+          <vert weight=85%
+            <vert weight=40% gap=[0,20,repeated] vertForm>
+            <vert margin=[20]
+              <horFormTitle weight=30 gap=10>
+              <horFormInput weight=30 gap=10>
+            >
+            <vert arrange=[30, variable] descForm>
+          >
+          <button margin=[20, 40%, 0, 40%]>
+        >
+        )~");
+
+    label name(modFm);
+    name.format(true);
+    name.caption("<size=14>Név</>");
+
+    textbox nameTb(modFm);
+    nameTb.append(selected->name, false);
+
+    label cat(modFm);
+    cat.format(true);
+    cat.caption("<size=14>Kategória</>");
+
+    combox catCb(modFm);
+    for (auto &category : categories) {
+      catCb.push_back(category);
+    }
+    catCb.caption(selected->category);
+
+    button save(modFm, "Mentés");
+
+    label lat(modFm);
+    lat.format(true);
+    lat.text_align(align::center);
+    lat.caption("<size=14>Szélesség</>");
+
+    label lon(modFm);
+    lon.format(true);
+    lon.text_align(align::center);
+    lon.caption("<size=14>Hosszúság</>");
+
+    label time(modFm);
+    time.format(true);
+    time.text_align(align::center);
+    time.caption("<size=14>Idő</>");
+
+    textbox latTb(modFm);
+    latTb.append(std::to_string(selected->latitude), false);
+
+    textbox lonTb(modFm);
+    lonTb.append(std::to_string(selected->longtitude), false);
+
+    textbox timeTb(modFm);
+    timeTb.append(std::to_string(selected->avgTime), false);
+
+    label desc(modFm);
+    desc.format(true);
+    desc.caption("<size=14>Leírás</>");
+
+    textbox descTb(modFm);
+    descTb.multi_lines(true);
+    descTb.line_wrapped(true);
+    descTb.append(selected->description, false);
+
+    modFm["vertForm"] << name << nameTb << cat << catCb;
+    modFm["horFormTitle"] << lat << lon << time;
+    modFm["horFormInput"] << latTb << lonTb << timeTb;
+    modFm["descForm"] << desc << descTb;
+    modFm["button"] << save;
+    modFm.collocate();
+    modFm.modality();
+    modFm.show();
+  });
 
   button showDescription(fm);
   showDescription.caption("Kijelölt leírása");
@@ -126,17 +205,20 @@ int main() {
       return;
     auto selected = getSelectedSight(list);
     form descFm(fm, {600, 300});
+    descFm.div("vert margin=20 <weight=30 header><body>");
     descFm.caption("Leírás");
-    label header(descFm, rectangle{20, 20, descFm.size().width - 20, 40});
-    textbox body(descFm, rectangle{20, 50, descFm.size().width - 40,
-                                   descFm.size().height - 70});
+    label header(descFm);
+    textbox body(descFm);
     header.text_align(align::center);
     header.format(true);
-    header.caption("<bold>" + selected->name + "</>");
+    header.caption("<bold size=14>" + selected->name + "</>");
     body.editable(false);
     body.append(selected->description, false);
     body.line_wrapped(true);
     body.multi_lines(true);
+    descFm["header"] << header;
+    descFm["body"] << body;
+    descFm.collocate();
     descFm.modality();
     descFm.show();
   });
