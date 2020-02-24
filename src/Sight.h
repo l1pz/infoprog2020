@@ -26,18 +26,24 @@ struct Sight : std::enable_shared_from_this<Sight> {
 
   friend nana::listbox::oresolver &operator<<(nana::listbox::oresolver &orr,
                                               const Sight &sight) {
-    orr << sight.name;
+    std::string hour = std::to_string(int(sight.avgTime)) + "ó ";
+    std::string minute =
+        std::to_string(int((sight.avgTime - int(sight.avgTime)) * 60)) + "p";
+    std::string time;
+
+    if (hour != "0ó ")
+      time += hour;
+    if (minute != "0p")
+      time += minute;
+
+    orr << sight.name << sight.category << sight.latitude << sight.longtitude
+        << time;
     return orr;
   }
 
   friend std::ostream &operator<<(std::ostream &orr, const Sight &sight) {
-    orr << sight.name;
-    return orr;
-  }
-
-  friend nana::listbox::iresolver &operator>>(nana::listbox::iresolver &orr,
-                                              Sight &sight) {
-    orr >> sight.name;
+    orr << sight.name << sight.category << sight.latitude << sight.longtitude
+        << sight.avgTime;
     return orr;
   }
 
