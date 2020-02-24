@@ -6,4 +6,4 @@ bin-obj/
 
 *.user
 .env
-*.a
+**.a
